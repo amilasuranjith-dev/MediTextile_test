@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediTex | Premium Medical Dressings</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter and Outfit -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles/style.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0F4C81', /* Classic Blue - Trustworthy/Medical */
+                        secondary: '#20B2AA', /* Light Sea Green - Hygiene/Freshness */
+                        accent: '#FF6B6B', /* Soft Red - Attention/Emergency context (subtle) */
+                        surface: '#F8FAFC',
+                        'surface-dark': '#1e293b',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body
+    class="bg-surface dark:bg-slate-900 text-gray-800 dark:text-gray-100 font-sans antialiased transition-colors duration-300">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 transition-all duration-300"
+        id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span
+                        class="font-heading font-bold text-2xl text-primary dark:text-blue-400 tracking-tight">MediTex</span>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home"
+                        class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white transition-colors font-medium">Home</a>
+                    <a href="#products"
+                        class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white transition-colors font-medium">Products</a>
+                    <a href="#quality"
+                        class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white transition-colors font-medium">Quality</a>
+                    <a href="#contact"
+                        class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white transition-colors font-medium">Contact</a>
+
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle"
+                        class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 p-2 rounded-full focus:outline-none transition-colors">
+                        <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                        <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor"
+                            viewBox="0 0 20 20">
+                            <path
+                                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                                fill-rule="evenodd" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+
+                    <a href="#contact"
+                        class="bg-primary hover:bg-blue-700 text-white px-6 py-2.5 rounded-full font-medium transition-all transform hover:scale-105 shadow-lg shadow-primary/20">
+                        Get Quote
+                    </a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button class="mobile-menu-button text-gray-600 hover:text-primary focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div
+            class="mobile-menu hidden md:hidden bg-white dark:bg-slate-800 border-t border-gray-100 dark:border-gray-700 absolute w-full shadow-xl">
+            <a href="#home"
+                class="block py-3 px-4 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300">Home</a>
+            <a href="#products"
+                class="block py-3 px-4 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300">Products</a>
+            <a href="#quality"
+                class="block py-3 px-4 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300">Quality</a>
+            <a href="#contact"
+                class="block py-3 px-4 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home"
+        class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden dark:bg-slate-900 transition-colors">
+        <div class="absolute inset-0 -z-10">
+            <div
+                class="absolute inset-0 bg-gradient-to-br from-blue-50 to-white dark:from-slate-900 dark:to-slate-800 opacity-70 transition-colors">
+            </div>
+            <!-- Decorative blobs -->
+            <div
+                class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-secondary/10 dark:bg-secondary/20 rounded-full blur-3xl">
+            </div>
+            <div
+                class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-primary/5 dark:bg-primary/20 rounded-full blur-3xl">
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8 animate-fade-in-up">
+                    <div
+                        class="inline-flex items-center px-4 py-2 rounded-full bg-blue-50 dark:bg-slate-800 text-primary dark:text-blue-300 text-sm font-semibold tracking-wide uppercase border border-blue-100 dark:border-slate-700">
+                        <span class="w-2 h-2 rounded-full bg-secondary mr-2 animate-pulse"></span>
+                        Premium Medical Supplies
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-heading font-bold text-gray-900 dark:text-white leading-tight">
+                        Advanced <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary dark:from-blue-400 dark:to-teal-400">Surgical
+                            Dressings</span> for Europe
+                    </h1>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-xl leading-relaxed">
+                        Setting the standard in sterility and comfort. Certified cotton bandages, gauze, and wool
+                        designed for professional healthcare facilities.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#products"
+                            class="inline-flex justify-center items-center px-8 py-4 bg-primary text-white rounded-full font-semibold hover:bg-opacity-90 dark:hover:bg-blue-600 transition-all transform hover:-translate-y-1 shadow-xl shadow-primary/20">
+                            View Products
+                        </a>
+                        <a href="#contact"
+                            class="inline-flex justify-center items-center px-8 py-4 bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-slate-700 rounded-full font-semibold hover:bg-gray-50 dark:hover:bg-slate-700 transition-all hover:border-gray-300">
+                            Contact Sales
+                        </a>
+                    </div>
+
+                    <div class="pt-8 flex items-center gap-8 text-gray-400">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="text-sm font-medium">ISO Certified</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <span class="text-sm font-medium">Sterile Grade</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative lg:h-[600px] flex items-center justify-center">
+                    <!-- Hero Image -->
+                    <div class="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl bg-gray-100 group">
+                        <img src="assets/hero.png" alt="Premium Medical Dressings"
+                            class="absolute inset-0 w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent"></div>
+                        <!-- Decorative elements -->
+                        <div
+                            class="absolute -right-12 -bottom-12 w-32 h-32 bg-secondary/20 rounded-full blur-2xl group-hover:bg-secondary/30 transition-all duration-500">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-24 bg-white dark:bg-slate-900 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-primary dark:text-blue-400 font-semibold tracking-wide uppercase text-sm mb-3">Our
+                    Catalogue</h2>
+                <h3 class="text-3xl md:text-4xl font-heading font-bold text-gray-900 dark:text-white mb-6">Medical Grade
+                    Dressings</h3>
+                <p class="text-gray-600 dark:text-gray-400">Precision-crafted cotton and gauze products designed for
+                    optimal wound care and
+                    surgical applications.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product Card 1: Cotton Bandage -->
+                <div
+                    class="group relative bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-xl dark:shadow-slate-900/50 transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+                    <div class="aspect-w-4 aspect-h-3 bg-gray-50 dark:bg-slate-700 relative overflow-hidden h-64">
+                        <img src="assets/cotton-bandage.png" alt="Cotton Bandage"
+                            class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-heading font-bold text-gray-900 dark:text-white mb-2">Cotton Bandage
+                        </h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">100% natural cotton,
+                            breathable and high
+                            absorbency. Ideal for securing dressings.</p>
+                        <a href="#"
+                            class="inline-flex items-center text-primary dark:text-blue-400 font-semibold hover:text-secondary dark:hover:text-teal-300 transition-colors">
+                            View Details <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product Card 2: Crepe Bandage -->
+                <div
+                    class="group relative bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-xl dark:shadow-slate-900/50 transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+                    <div class="aspect-w-4 aspect-h-3 bg-gray-50 dark:bg-slate-700 relative overflow-hidden h-64">
+                        <img src="assets/crepe-bandage.png" alt="Crepe Bandage"
+                            class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-heading font-bold text-gray-900 dark:text-white mb-2">Crepe Bandage</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">Elastic support for
+                            sprains and strains.
+                            Durable and washable fabric.</p>
+                        <a href="#"
+                            class="inline-flex items-center text-primary dark:text-blue-400 font-semibold hover:text-secondary dark:hover:text-teal-300 transition-colors">
+                            View Details <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product Card 3: Surgical Cotton Wool -->
+                <div
+                    class="group relative bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-xl dark:shadow-slate-900/50 transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+                    <div class="aspect-w-4 aspect-h-3 bg-gray-50 dark:bg-slate-700 relative overflow-hidden h-64">
+                        <img src="assets/cotton-wool.png" alt="Surgical Cotton Wool"
+                            class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-heading font-bold text-gray-900 dark:text-white mb-2">Surgical Cotton
+                            Wool</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">Highly absorbent,
+                            impurities-free. Perfect
+                            for wound cleaning and padding.</p>
+                        <a href="#"
+                            class="inline-flex items-center text-primary dark:text-blue-400 font-semibold hover:text-secondary dark:hover:text-teal-300 transition-colors">
+                            View Details <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product Card 4: Absorbent Cotton Gauze -->
+                <div
+                    class="group relative bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-xl dark:shadow-slate-900/50 transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+                    <div class="aspect-w-4 aspect-h-3 bg-gray-50 dark:bg-slate-700 relative overflow-hidden h-64">
+                        <img src="assets/gauze.png" alt="Absorbent Cotton Gauze"
+                            class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-heading font-bold text-gray-900 dark:text-white mb-2">Absorbent Cotton
+                            Gauze</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">Conforms to BP standards.
+                            Available in rolls
+                            and swabs.</p>
+                        <a href="#"
+                            class="inline-flex items-center text-primary dark:text-blue-400 font-semibold hover:text-secondary dark:hover:text-teal-300 transition-colors">
+                            View Details <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product Card 5: Absorbent Cotton Lint -->
+                <div
+                    class="group relative bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-xl dark:shadow-slate-900/50 transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+                    <div class="aspect-w-4 aspect-h-3 bg-gray-50 dark:bg-slate-700 relative overflow-hidden h-64">
+                        <img src="assets/lint.png" alt="Absorbent Cotton Lint"
+                            class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-heading font-bold text-gray-900 dark:text-white mb-2">Absorbent Cotton
+                            Lint</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">Soft flexible material,
+                            napped on one side.
+                            Ideal for sensitive wounds.</p>
+                        <a href="#"
+                            class="inline-flex items-center text-primary dark:text-blue-400 font-semibold hover:text-secondary dark:hover:text-teal-300 transition-colors">
+                            View Details <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us / Trust Section -->
+    <section id="quality" class="py-24 bg-surface dark:bg-slate-800 relative overflow-hidden transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl h-[500px] bg-gray-200 dark:bg-gray-700">
+                        <div
+                            class="absolute inset-0 flex items-center justify-center text-gray-400 dark:text-gray-500 font-medium">
+                            Image: Lab/Quality Control
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2">
+                    <h2 class="text-primary dark:text-blue-300 font-semibold tracking-wide uppercase text-sm mb-3">
+                        European Standards</h2>
+                    <h3 class="text-3xl md:text-4xl font-heading font-bold text-gray-900 dark:text-white mb-6">
+                        Excellence in Every
+                        Thread</h3>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
+                        MediTex manages the entire supply chain from raw cotton to finished sterile dressing. Our
+                        manufacturing processes are rigorously tested to meet European safety and quality directives.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <span
+                                    class="flex items-center justify-center h-12 w-12 rounded-lg bg-white dark:bg-slate-700 shadow-md text-primary dark:text-blue-300">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-xl font-bold text-gray-900 dark:text-white">CE Certified</h4>
+                                <p class="mt-2 text-gray-600 dark:text-gray-400">Compliant with EU Medical Device
+                                    Regulations, ensuring
+                                    safety and performance.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <span
+                                    class="flex items-center justify-center h-12 w-12 rounded-lg bg-white dark:bg-slate-700 shadow-md text-primary dark:text-blue-300">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                                        </path>
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-xl font-bold text-gray-900 dark:text-white">Lab Tested</h4>
+                                <p class="mt-2 text-gray-600 dark:text-gray-400">Every batch undergoes strict bio-burden
+                                    and sterility
+                                    testing.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 dark:bg-black text-white pt-20 pb-10 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div>
+                    <span class="font-heading font-bold text-2xl text-white tracking-tight mb-6 block">MediTex</span>
+                    <p class="text-gray-400 mb-6">Premium surgical dressings and cotton products for the European
+                        healthcare sector.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Quick Links</h4>
+                    <ul class="space-y-4 text-gray-400">
+                        <li><a href="#home" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#products" class="hover:text-white transition-colors">Products</a></li>
+                        <li><a href="#quality" class="hover:text-white transition-colors">Quality Assurance</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Products</h4>
+                    <ul class="space-y-4 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Cotton Bandage</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Crepe Bandage</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Surgical Wool</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Absorbent Gauze</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Contact</h4>
+                    <ul class="space-y-4 text-gray-400">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-3 text-secondary" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span>123 Medical Park, <br>Brussels, Belgium</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 mr-3 text-secondary" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            <span>export@meditex.eu</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+                <p>&copy; 2026 MediTex. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/script.js"></script>
+</body>
+
+</html>
