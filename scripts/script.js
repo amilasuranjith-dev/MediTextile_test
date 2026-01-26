@@ -47,44 +47,65 @@ document.querySelectorAll('section > div').forEach((section) => {
     observer.observe(section);
 });
 
-// Dark Mode Toggle
-const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
+// Dark Mode Toggle - Initialize ASAP for Safari
+(function () {
+    // Check theme preference immediately
+    const isDarkMode = localStorage.getItem('color-theme') === 'dark' ||
+        (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
-function updateThemeIcons() {
-    const isDark = document.documentElement.classList.contains('dark');
+    if (isDarkMode) {
+        document.documentElement.classList.add('dark');
+    }
+})();
+
+// Wait for DOM to be ready
+document.addEventListener('DOMContentLoaded', function () {
+    const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
+
+    function updateThemeIcons() {
+        const isDark = document.documentElement.classList.contains('dark');
+
+        themeToggleBtns.forEach(btn => {
+            const darkIcon = btn.querySelector('.theme-toggle-dark-icon');
+            const lightIcon = btn.querySelector('.theme-toggle-light-icon');
+
+            if (!darkIcon || !lightIcon) return;
+
+            // Force display update for Safari
+            if (isDark) {
+                darkIcon.classList.remove('hidden');
+                darkIcon.style.display = 'block';
+                lightIcon.classList.add('hidden');
+                lightIcon.style.display = 'none';
+            } else {
+                lightIcon.classList.remove('hidden');
+                lightIcon.style.display = 'block';
+                darkIcon.classList.add('hidden');
+                darkIcon.style.display = 'none';
+            }
+        });
+    }
+
+    // Initial icon update
+    updateThemeIcons();
+
+    // Add click handlers
     themeToggleBtns.forEach(btn => {
-        const darkIcon = btn.querySelector('.theme-toggle-dark-icon');
-        const lightIcon = btn.querySelector('.theme-toggle-light-icon');
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
 
-        if (isDark) {
-            darkIcon.classList.remove('hidden');
-            lightIcon.classList.add('hidden');
-        } else {
-            lightIcon.classList.remove('hidden');
-            darkIcon.classList.add('hidden');
-        }
-    });
-}
+            // Toggle theme
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
 
-// Initial check
-if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.documentElement.classList.add('dark');
-} else {
-    document.documentElement.classList.remove('dark');
-}
-updateThemeIcons();
-
-themeToggleBtns.forEach(btn => {
-    btn.addEventListener('click', function () {
-        // Toggle theme
-        if (document.documentElement.classList.contains('dark')) {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('color-theme', 'light');
-        } else {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('color-theme', 'dark');
-        }
-        updateThemeIcons();
+            // Update all icons
+            updateThemeIcons();
+        });
     });
 });
 

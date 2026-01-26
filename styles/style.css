@@ -29,6 +29,7 @@ html {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -45,4 +46,27 @@ html {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Smooth Dark Mode Transitions */
+* {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+}
+
+/* Prevent transition on page load */
+.no-transition * {
+    transition: none !important;
+}
+
+/* Theme Toggle Icon Visibility - Explicit for Safari */
+.theme-toggle-dark-icon.hidden,
+.theme-toggle-light-icon.hidden {
+    display: none !important;
+}
+
+.theme-toggle-dark-icon:not(.hidden),
+.theme-toggle-light-icon:not(.hidden) {
+    display: block !important;
 }
