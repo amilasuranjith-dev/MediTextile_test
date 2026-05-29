@@ -138,6 +138,7 @@ export default function QuoteRequestPage() {
                       src={item.image_url || '/assets/favicon.png'}
                       alt={item.name}
                       fill
+                      sizes="96px"
                       className="object-cover"
                     />
                   </div>

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { ShieldCheck, Activity, Award, ArrowRight, CheckCircle2, ChevronRight } from 'lucide-react';
 import { createClient } from '@/utils/supabase/server';
 import { mockProducts } from '@/utils/mockData';
+import Hero3DVisualizer from '@/components/Hero3DVisualizer';
 
 // Fetch products from database, with fallback to mock data
 async function getFeaturedProducts() {
@@ -86,20 +87,9 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {/* Right Column (Hero Graphic) */}
-            <div className="relative flex justify-center items-center">
-              <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/20 dark:border-slate-800/80 group">
-                <Image
-                  src="/assets/hero.png"
-                  alt="Premium Medical Dressings"
-                  fill
-                  className="object-cover transform scale-100 group-hover:scale-103 transition-transform duration-700"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-                {/* Decorative glowing overlay */}
-                <div className="absolute -bottom-16 -right-16 w-48 h-48 bg-secondary/15 rounded-full blur-2xl group-hover:bg-secondary/25 transition-all duration-500" />
-              </div>
+            {/* Right Column (Interactive 3D Visualizer) */}
+            <div className="relative w-full animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+              <Hero3DVisualizer />
             </div>
           </div>
         </div>
@@ -157,6 +147,7 @@ export default async function HomePage() {
                     src={product.image_url || '/assets/favicon.png'}
                     alt={product.name}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transform group-hover:scale-105 transition-transform duration-500"
                   />
                   {product.is_sterile && (
@@ -199,7 +190,7 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Left visual box */}
-            <div className="relative rounded-3xl overflow-hidden shadow-xl aspect-video lg:h-[450px] bg-slate-50 dark:bg-slate-800 border border-gray-105 dark:border-slate-800 flex items-center justify-center">
+            <div className="relative rounded-3xl overflow-hidden shadow-xl w-full h-96 lg:h-full min-h-[350px] lg:min-h-[450px] bg-slate-50 dark:bg-slate-800 border border-gray-105 dark:border-slate-800 flex items-center justify-center">
               <div className="absolute inset-0 bg-slate-950/5 z-10" />
               {/* Fallback pattern representing sterile laboratory */}
               <div className="text-center p-8 z-20">

@@ -218,6 +218,7 @@ export default function ProductsDashboardManager({ initialProducts, isSimulated 
                             src={product.image_url || '/assets/favicon.png'}
                             alt={product.name}
                             fill
+                            sizes="56px"
                             className="object-cover"
                           />
                         </div>

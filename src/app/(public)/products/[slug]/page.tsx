@@ -85,6 +85,7 @@ export default async function ProductDetailsPage({ params }: PageProps) {
                 src={product.image_url || '/assets/favicon.png'}
                 alt={product.name}
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
                 priority
               />
