@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { LayoutDashboard, Briefcase, FileText, Home, LogOut, ShieldAlert } from 'lucide-react';
+import { LayoutDashboard, Briefcase, FileText, Home, LogOut, Package } from 'lucide-react';
 import { logout } from '@/app/actions/auth';
 
 export default function AdminDashboardLayout({
@@ -12,6 +12,7 @@ export default function AdminDashboardLayout({
     { name: 'Overview', href: '/admin', icon: LayoutDashboard },
     { name: 'Products Catalog', href: '/admin/products', icon: Briefcase },
     { name: 'Quote Inquiries', href: '/admin/quotes', icon: FileText },
+    { name: 'Enterprise ERP', href: '/admin/erp', icon: Package },
   ];
 
   return (

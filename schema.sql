@@ -180,3 +180,73 @@ SET name = EXCLUDED.name,
     image_url = EXCLUDED.image_url,
     is_sterile = EXCLUDED.is_sterile,
     certifications = EXCLUDED.certifications;
+
+-- 10. ERP EXTENSION TABLES
+
+-- Raw materials inventory
+CREATE TABLE IF NOT EXISTS public.raw_materials (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name TEXT NOT NULL,
+    sku TEXT NOT NULL UNIQUE,
+    stock_qty NUMERIC NOT NULL DEFAULT 0 CHECK (stock_qty >= 0),
+    unit TEXT NOT NULL DEFAULT 'kg', -- kg, meters, rolls, etc.
+    reorder_level NUMERIC NOT NULL DEFAULT 10,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- Production runs / manufacturing batches
+CREATE TABLE IF NOT EXISTS public.production_batches (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    product_id UUID REFERENCES public.products(id) ON DELETE CASCADE NOT NULL,
+    lot_number TEXT NOT NULL UNIQUE,
+    quantity_produced INTEGER NOT NULL CHECK (quantity_produced > 0),
+    status TEXT NOT NULL DEFAULT 'scheduled', -- scheduled, in_progress, completed, failed
+    scheduled_date TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+    completed_date TIMESTAMP WITH TIME ZONE
+);
+
+-- Logistics / Shipping logs
+CREATE TABLE IF NOT EXISTS public.shipments (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    quote_request_id UUID REFERENCES public.quote_requests(id) ON DELETE CASCADE NOT NULL,
+    carrier TEXT NOT NULL,
+    tracking_number TEXT,
+    status TEXT NOT NULL DEFAULT 'preparing', -- preparing, shipped, in_transit, delivered
+    customs_documents TEXT, -- URL or filename
+    shipped_at TIMESTAMP WITH TIME ZONE
+);
+
+-- 11. ENABLE RLS FOR ERP TABLES
+ALTER TABLE public.raw_materials ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.production_batches ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.shipments ENABLE ROW LEVEL SECURITY;
+
+-- 12. CREATE RLS POLICIES FOR ERP TABLES (Authenticated users only)
+CREATE POLICY "Allow authenticated read and write to raw_materials"
+ON public.raw_materials FOR ALL
+TO authenticated
+USING (true)
+WITH CHECK (true);
+
+CREATE POLICY "Allow authenticated read and write to production_batches"
+ON public.production_batches FOR ALL
+TO authenticated
+USING (true)
+WITH CHECK (true);
+
+CREATE POLICY "Allow authenticated read and write to shipments"
+ON public.shipments FOR ALL
+TO authenticated
+USING (true)
+WITH CHECK (true);
+
+-- 13. SEED INITIAL RAW MATERIALS
+INSERT INTO public.raw_materials (name, sku, stock_qty, unit, reorder_level)
+VALUES 
+('Raw Medical Grade Cotton', 'RAW-COTTON-01', 1250.0, 'kg', 200.0),
+('Elastic Crepe Spandex Yarn', 'SPANDEX-YARN-02', 450.0, 'kg', 80.0),
+('Sterile EO Indicators', 'STERILE-EO-IND', 2500.0, 'units', 500.0),
+('Medical Packaging Boxes', 'PACK-BOX-MED', 1200.0, 'units', 300.0)
+ON CONFLICT (sku) DO UPDATE
+SET stock_qty = EXCLUDED.stock_qty,
+    reorder_level = EXCLUDED.reorder_level;
